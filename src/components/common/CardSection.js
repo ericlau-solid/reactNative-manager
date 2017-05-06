@@ -1,16 +1,16 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const CardSection = ({ children }) => {
-  const { containerStyle } = style;
+const CardSection = ({ children, style }) => {
+  const { containerStyle } = styles;
   return (
-    <View style={containerStyle}>
+    <View style={[containerStyle, style]}>
       {children}
     </View>
   );
 };
 
-const style = {
+const styles = {
   containerStyle: {
     borderBottomWidth: 1,
     padding: 5,
