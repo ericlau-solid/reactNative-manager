@@ -1,7 +1,13 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
+import { connect } from 'react-redux';
+import { getEmployees } from '../actions';
 
 class EmployeeList extends Component {
+  componentWillMount() {
+    this.props.getEmployees();
+  }
+
   render() {
     return (
       <View>
@@ -13,4 +19,8 @@ class EmployeeList extends Component {
   }
 }
 
-export default EmployeeList;
+const mapStateToProps = () => ({
+
+});
+
+export default connect(mapStateToProps, { getEmployees })(EmployeeList);

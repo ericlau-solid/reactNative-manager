@@ -1,12 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Picker, Text } from 'react-native';
-import { Card, CardSection, TextField, Button } from './common';
-import { employeeUpdate } from '../actions';
+import { Card, CardSection, TextField, Button, Spinner } from './common';
+import { employeeUpdate, employeeAddToStorage } from '../actions';
 
 export class EmployeeCreate extends Component {
+  renderButton = () => {
+    const { name, phone, shift, saving, } = this.props;
+    if (saving) {
+      return <Spinner size="large" />;
+    } 
+
+    return (
+      <Button onPress={() => this.props.employeeAddToStorage({ name, phone, shift })}>
+        Add
+      </Button>
+    );
+  }
+
   render() {
-    const { name, phone, shift } = this.props;
+    const { name, phone, shift, } = this.props;
     return (
       <Card>
         <CardSection>
@@ -39,9 +52,7 @@ export class EmployeeCreate extends Component {
           </Picker>
         </CardSection>
         <CardSection>
-          <Button>
-            Add
-          </Button>
+          {this.renderButton()}
         </CardSection>
       </Card>
     );
@@ -56,10 +67,10 @@ const styles = {
 };
 
 const mapStateToProps = ({ employeeAddForm }) => {
-  const { name, phone, shift } = employeeAddForm;
-  return { name, phone, shift };
+  const { name, phone, shift, saving } = employeeAddForm;
+  return { name, phone, shift, saving };
 };
 
 export default connect(mapStateToProps, {
-  employeeUpdate,
+  employeeUpdate, employeeAddToStorage,
 })(EmployeeCreate);
