@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button, Spinner } from './common';
-import { employeeUpdate, employeeAddToStorage } from '../actions';
+import { employeeBootstrapForm, employeeUpdateStorage } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
-export class EmployeeCreateComponent extends Component {
+export class EmployeeEditComponent extends Component {
+  componentWillMount() {
+    this.props.employeeBootstrapForm(this.props.employee);
+  }
+
   renderButton = () => {
     const { name, phone, shift, saving, } = this.props;
     if (saving) {
@@ -12,8 +16,8 @@ export class EmployeeCreateComponent extends Component {
     } 
 
     return (
-      <Button onPress={() => this.props.employeeAddToStorage({ name, phone, shift })}>
-        Add
+      <Button onPress={() => this.props.employeeUpdateStorage({ name, phone, shift })}>
+        Save
       </Button>
     );
   }
@@ -36,5 +40,5 @@ const mapStateToProps = ({ employeeForm }) => {
 };
 
 export default connect(mapStateToProps, {
-  employeeUpdate, employeeAddToStorage,
-})(EmployeeCreateComponent);
+  employeeBootstrapForm, employeeUpdateStorage,
+})(EmployeeEditComponent);

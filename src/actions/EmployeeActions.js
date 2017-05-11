@@ -3,7 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { 
   EMPLOYEE_UPDATE, 
   EMPLOYEE_ADD_FAIL, EMPLOYEE_ADD_START, EMPLOYEE_ADD_SUCCESS,
-  EMPLOYEES_GET_SUCCESS, 
+  EMPLOYEES_GET_SUCCESS, EMPLOYEE_BOOTSTRAP_FORM
 } from './types';
 
 export const employeeUpdate = ({ prop, value }) => ({
@@ -11,6 +11,11 @@ export const employeeUpdate = ({ prop, value }) => ({
     payload: { prop, value }
   }
 );
+
+export const employeeBootstrapForm = employee => ({
+  type: EMPLOYEE_BOOTSTRAP_FORM,
+  payload: employee
+});
 
 const employeeAddSuccess = (dispatch, payload) => {
   dispatch({
@@ -61,3 +66,7 @@ export const getEmployees = () => (
       });
   }
 );
+
+export const employeeUpdateStorage = ({ name, phone, shift }) => {
+  console.log({ name, phone, shift });
+};
