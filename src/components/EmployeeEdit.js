@@ -5,7 +5,7 @@ import { employeeBootstrapForm, employeeUpdateStorage } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
 export class EmployeeEditComponent extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.employeeBootstrapForm(this.props.employee);
   }
 
