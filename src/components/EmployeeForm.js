@@ -29,13 +29,13 @@ export class EmployeeFormComponent extends Component {
             selectedValue={shift}
             onValueChange={value => this.props.employeeUpdate({ prop: 'shift', value })}
           >
-            <Picker.Item label="Monday" value="1" />
-            <Picker.Item label="Tuesday" value="2" />
-            <Picker.Item label="Wednesday" value="3" />
-            <Picker.Item label="Thursday" value="4" />
-            <Picker.Item label="Friday" value="5" />
-            <Picker.Item label="Saturday" value="6" />
-            <Picker.Item label="Sunday" value="7" />
+            <Picker.Item label="Monday" value={1} />
+            <Picker.Item label="Tuesday" value={2} />
+            <Picker.Item label="Wednesday" value={3} />
+            <Picker.Item label="Thursday" value={4} />
+            <Picker.Item label="Friday" value={5} />
+            <Picker.Item label="Saturday" value={6} />
+            <Picker.Item label="Sunday" value={7} />
           </Picker>
         </CardSection>
       </View>

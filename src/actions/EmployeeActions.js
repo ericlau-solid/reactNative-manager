@@ -1,5 +1,7 @@
 import firebase from 'firebase';
 import { Actions } from 'react-native-router-flux';
+import { text as sendTextMessage } from 'react-native-communications';
+import moment from 'moment';
 import { 
   EMPLOYEE_UPDATE, 
   EMPLOYEE_ADD_FAIL, EMPLOYEE_ADD_START, EMPLOYEE_ADD_SUCCESS,
@@ -68,9 +70,8 @@ export const getEmployees = () => (
   }
 );
 
-export const employeeUpdateStorage = ({ name, phone, shift, uid }) => {
-  console.log({ name, phone, shift });
-  return async dispatch => {
+export const employeeUpdateStorage = ({ name, phone, shift, uid }) => (
+  async dispatch => {
     dispatch({ type: EMPLOYEE_SAVE_START });
     const { currentUser } = firebase.auth();
     try {
@@ -83,8 +84,8 @@ export const employeeUpdateStorage = ({ name, phone, shift, uid }) => {
     } catch (error) {
       dispatch(employeeUpdateStorageFail, error);
     }
-  };
-};
+  }
+);
 
 const employeeUpdateStorageSuccess = (dispatch, payload) => {
   dispatch({
@@ -99,3 +100,11 @@ const employeeUpdateStorageFail = (dispatch, error) => {
     payload: error,
   });
 };
+
+export const sendText = ({ phone, shift }) => (
+  () => {
+    const weekDay = moment().isoWeekday(shift).format('dddd');
+    sendTextMessage(phone, `Your upcoming shift is on ${weekDay}`);
+  }
+);
+

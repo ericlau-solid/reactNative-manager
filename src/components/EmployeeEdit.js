@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Card, CardSection, Button, Spinner } from './common';
-import { employeeBootstrapForm, employeeUpdateStorage } from '../actions';
+import { employeeBootstrapForm, employeeUpdateStorage, sendText } from '../actions';
 import EmployeeForm from './EmployeeForm';
 
 export class EmployeeEditComponent extends Component {
@@ -27,11 +27,17 @@ export class EmployeeEditComponent extends Component {
   }
 
   render() {
+    const { phone, shift } = this.props;
     return (
       <Card>
         <EmployeeForm {...this.props} />
         <CardSection>
           {this.renderButton()}
+        </CardSection>
+        <CardSection>
+          <Button onPress={() => { this.props.sendText({ phone, shift }); }}>
+            Text Schedule
+          </Button>
         </CardSection>
       </Card>
     );
@@ -44,5 +50,5 @@ const mapStateToProps = ({ employeeForm }) => {
 };
 
 export default connect(mapStateToProps, {
-  employeeBootstrapForm, employeeUpdateStorage,
+  employeeBootstrapForm, employeeUpdateStorage, sendText
 })(EmployeeEditComponent);
