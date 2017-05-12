@@ -10,13 +10,17 @@ export class EmployeeEditComponent extends Component {
   }
 
   renderButton = () => {
-    const { name, phone, shift, saving, } = this.props;
+    const { name, phone, shift, saving, employee } = this.props;
     if (saving) {
       return <Spinner size="large" />;
     } 
 
     return (
-      <Button onPress={() => this.props.employeeUpdateStorage({ name, phone, shift })}>
+      <Button 
+        onPress={() => this.props.employeeUpdateStorage(
+          { name, phone, shift, uid: employee.uid }
+        )}
+      >
         Save
       </Button>
     );

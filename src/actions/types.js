@@ -11,3 +11,7 @@ export const EMPLOYEES_GET_START = 'employees_get_start';
 export const EMPLOYEES_GET_SUCCESS = 'employees_get_success';
 export const EMPLOYEES_GET_FAIL = 'employees_get_fail';
 export const EMPLOYEE_BOOTSTRAP_FORM = 'employee_bootstrap_form';
+export const EMPLOYEE_SAVE_FAIL = 'employee_save_fail';
+export const EMPLOYEE_SAVE_START = 'employee_save"start';
+export const EMPLOYEE_SAVE_SUCCESS = 'employee_save_success';
+

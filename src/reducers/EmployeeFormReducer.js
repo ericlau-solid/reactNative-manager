@@ -3,6 +3,7 @@ import {
   EMPLOYEE_ADD_SUCCESS,
   EMPLOYEE_ADD_START,
   EMPLOYEE_BOOTSTRAP_FORM,
+  EMPLOYEE_SAVE_SUCCESS,
 } from '../actions/types';
 
 const initialState = {
@@ -25,7 +26,8 @@ export default (state = initialState, action) => {
     case EMPLOYEE_ADD_START: {
       return { ...state, saving: true };
     }
-    case EMPLOYEE_ADD_SUCCESS: {
+    case EMPLOYEE_ADD_SUCCESS:
+    case EMPLOYEE_SAVE_SUCCESS: {
       return initialState;
     }
     default: {

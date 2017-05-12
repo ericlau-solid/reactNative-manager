@@ -3,6 +3,7 @@ import { Actions } from 'react-native-router-flux';
 import { 
   EMPLOYEE_UPDATE, 
   EMPLOYEE_ADD_FAIL, EMPLOYEE_ADD_START, EMPLOYEE_ADD_SUCCESS,
+  EMPLOYEE_SAVE_FAIL, EMPLOYEE_SAVE_START, EMPLOYEE_SAVE_SUCCESS,
   EMPLOYEES_GET_SUCCESS, EMPLOYEE_BOOTSTRAP_FORM
 } from './types';
 
@@ -67,6 +68,34 @@ export const getEmployees = () => (
   }
 );
 
-export const employeeUpdateStorage = ({ name, phone, shift }) => {
+export const employeeUpdateStorage = ({ name, phone, shift, uid }) => {
   console.log({ name, phone, shift });
+  return async dispatch => {
+    dispatch({ type: EMPLOYEE_SAVE_START });
+    const { currentUser } = firebase.auth();
+    try {
+      const result = await firebase.database().ref(`/users/${currentUser.uid}/employees/${uid}`)
+      .set(
+        { name, phone, shift }
+      );
+      employeeUpdateStorageSuccess(dispatch, result);
+      Actions.employeeList({ type: 'reset' });
+    } catch (error) {
+      dispatch(employeeUpdateStorageFail, error);
+    }
+  };
+};
+
+const employeeUpdateStorageSuccess = (dispatch, payload) => {
+  dispatch({
+    type: EMPLOYEE_SAVE_SUCCESS,
+    payload,
+  });
+};
+
+const employeeUpdateStorageFail = (dispatch, error) => {
+  dispatch({
+    type: EMPLOYEE_SAVE_FAIL,
+    payload: error,
+  });
 };
