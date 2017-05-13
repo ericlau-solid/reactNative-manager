@@ -108,3 +108,9 @@ export const sendText = ({ phone, shift }) => (
   }
 );
 
+export const fireEmployee = uid => (
+  () => {
+    console.log(uid);
+  }
+);
+
